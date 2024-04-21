@@ -7,7 +7,7 @@ import java.util.Iterator;
 * Supports iteration
 * Implements MyList interface
  */
-public class MyLinkedList<T> implements MyList<T> {
+public final class MyLinkedList<T> implements MyList<T> {
 
     private Node<T> head;
 
@@ -74,7 +74,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     /*
     * adds items to the end of the linked list.
-    * Time complexity: O(n) where n is the size of the linked list.
+    * Time complexity: O(1)
     * @param item the item to be added.
      */
     @Override
@@ -89,15 +89,7 @@ public class MyLinkedList<T> implements MyList<T> {
         }
         else{
 
-            Node<T> currentNode = head;
-
-            while(currentNode.next != null)
-
-                currentNode = currentNode.next;
-
-            currentNode.next = newNode;
-
-            newNode.prev = currentNode;
+            makeLink(tail, newNode);
 
         }
 
@@ -158,9 +150,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
         if(index == 0) {
 
-            newNode.next = head;
-
-            head.prev = newNode;
+            makeLink(newNode, head);
 
             head = newNode;
 
@@ -295,11 +285,15 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public void removeFirst() {
 
+        checkIndex(0);
+
         head = head.next;
 
         if(head != null)
 
             head.prev = null;
+
+        size--;
 
     }
     /*
@@ -309,36 +303,55 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public void removeLast() {
 
+        checkIndex(size-1);
+
         tail = tail.prev;
 
         tail.next = null;
 
+        size--;
+
+    }
+
+    private void makeLink(Node<T> a, Node<T> b){
+        if(a != null)
+            a.next = b;
+        if(b != null)
+           b.prev = a;
+    }
+
+    private void bubbleSort(Object[]  arr){
+        Object temp;
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr.length - i - 1; j++) {
+                Comparable<T> t1 = (Comparable<T>) arr[j];
+                temp = arr[j+1];
+                if (t1.compareTo((T) temp) > 0) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
     }
     /*
      * sorts the linked list by converting it to an ordinary list sorting it with bubble sort,
      * and appending the resulting list back to the linked list.
      * Time complexity: O(n*n) where n is the size of the linked list.
      */
+    private void bubbleSort(){
+        Object[] a = toArray();
+        bubbleSort(a);
+        clear();
+        for(var i : a)
+            add((T) i);
+    }
+
     @Override
     public void sort() {
         if(size == 0)
             return;
-        T[] a = toArray();
-        T temp;
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j < a.length - i - 1; j++) {
-                Comparable<T> t1 = (Comparable<T>) a[j];
-                temp = a[j+1];
-                if (t1.compareTo(temp) > 0) {
-                    temp = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = temp;
-                }
-            }
-        }
-        clear();
-        for(var i : a)
-            add(i);
+        bubbleSort();
     }
 
     /*
@@ -408,9 +421,9 @@ public class MyLinkedList<T> implements MyList<T> {
      * @return the array.
      */
     @Override
-    public T[] toArray() {
+    public Object[] toArray() {
 
-        T[] toArr = (T[]) new Object[size];
+        Object[]  toArr = new Object[size];
 
         Node<T> currentNode = head;
 
