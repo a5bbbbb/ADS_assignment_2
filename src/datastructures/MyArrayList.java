@@ -143,9 +143,7 @@ public final class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void removeLast() {
-
-        size--;
-
+        remove(size-1);
     }
 
     private void bubbleSort(Object[]  arr){
