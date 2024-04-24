@@ -1,3 +1,5 @@
+package datastructures;
+
 import java.util.Iterator;
 
 
@@ -5,7 +7,7 @@ import java.util.Iterator;
 *
 * Doubly linked list
 * Supports iteration
-* Implements MyList interface
+* Implements datastructures.MyList interface
  */
 public final class MyLinkedList<T> implements MyList<T> {
 
@@ -314,22 +316,43 @@ public final class MyLinkedList<T> implements MyList<T> {
     }
 
     private void makeLink(Node<T> a, Node<T> b){
+
         if(a != null)
+
             a.next = b;
+
         if(b != null)
+
            b.prev = a;
+
     }
 
     private void bubbleSort(Object[]  arr){
+
         Object temp;
-        for(int i = 0; i < arr.length; i++){
-            for(int j = 0; j < arr.length - i - 1; j++) {
+
+        boolean check_again = true;
+
+        while(check_again){
+
+            check_again = false;
+
+            for(int j = 0; j < size - 1; j++) {
+
                 Comparable<T> t1 = (Comparable<T>) arr[j];
+
                 temp = arr[j+1];
+
                 if (t1.compareTo((T) temp) > 0) {
+
+                    check_again = true;
+
                     temp = arr[j];
+
                     arr[j] = arr[j + 1];
+
                     arr[j + 1] = temp;
+
                 }
             }
         }

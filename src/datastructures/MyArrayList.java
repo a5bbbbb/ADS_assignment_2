@@ -1,6 +1,8 @@
+package datastructures;
+
 import java.util.Iterator;
 
-public class MyArrayList<T> implements MyList<T>{
+public final class MyArrayList<T> implements MyList<T>{
     private Object[] arr = new Object[5];
 
     private int size = 0, actual_size = 5;
