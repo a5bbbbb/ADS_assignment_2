@@ -50,7 +50,11 @@ public final class MyQueue<T> {
 
     public T pop(){
 
+        T el = ls.getFirst();
+
         ls.removeFirst();
+
+        return el;
 
     }
 
