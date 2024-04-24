@@ -1,10 +1,13 @@
+import datastructures.MyLinkedList;
+import datastructures.MyList;
+
 import java.util.Scanner;
 
 public class Main {
 
     private final static Scanner scan = new Scanner(System.in);
 
-    private final static MyLinkedList<Integer> ls = new MyLinkedList<>();
+    private final static MyList<Integer> ls = new MyLinkedList<>();
 
     private static void printArray(){
         System.out.println("size: " + ls.size());
@@ -94,6 +97,11 @@ public class Main {
         ls.add(5);
         ls.add(8);
         ls.add(4);
+        ls.add(2);
+        ls.add(3);
+        ls.add(6);
+        ls.add(1023);
+        ls.add(1);
 
 
         while(true){
@@ -104,7 +112,7 @@ public class Main {
 
             //testSort();
 
-            //testFind();
+            testFind();
 
             testLastFind();
         }
