@@ -146,9 +146,9 @@ public final class MyArrayList<T> implements MyList<T>{
         remove(size-1);
     }
 
-    private void bubbleSort(Object[]  arr){
+    private void bubbleSort(T[]  arr){
 
-        Object temp;
+        T temp;
 
         boolean check_again = true;
 
@@ -179,7 +179,7 @@ public final class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void sort() {
-        bubbleSort(arr);
+        bubbleSort((T[])arr);
     }
 
     @Override

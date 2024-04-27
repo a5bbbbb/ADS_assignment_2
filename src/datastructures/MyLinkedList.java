@@ -327,9 +327,9 @@ public final class MyLinkedList<T> implements MyList<T> {
 
     }
 
-    private void bubbleSort(Object[]  arr){
+    private void bubbleSort(T[]  arr){
 
-        Object temp;
+        T temp;
 
         boolean check_again = true;
 
@@ -363,7 +363,7 @@ public final class MyLinkedList<T> implements MyList<T> {
      * Time complexity: O(n*n) where n is the size of the linked list.
      */
     private void bubbleSort(){
-        Object[] a = toArray();
+        T[] a = (T[]) toArray();
         bubbleSort(a);
         clear();
         for(var i : a)
