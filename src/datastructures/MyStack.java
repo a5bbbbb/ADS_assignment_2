@@ -2,13 +2,12 @@ package datastructures;
 
 import java.util.Iterator;
 
-public final class MyStack<T> {
-    MyList<T> ls;
+public final class MyStack<T> implements Iterable<T> {
+    MyLinkedList<T> ls;
 
     private class MyIterator<T> implements Iterator<T> {
 
         int index = 0;
-
         Object[] a;
 
         public MyIterator(Object[] a) {
@@ -29,31 +28,36 @@ public final class MyStack<T> {
     }
 
     public MyStack() {
-
         this.ls = new MyLinkedList<>();
+    }
 
+    private boolean checkIndex(int index){
+        return 0 <= index && index < size();
+    }
+
+    private void checkIndexWithThrow(int index){
+        if(!checkIndex(index))
+            throw new RuntimeException("Stack is empty, or operation is performed on non-existent index.");
     }
 
     public void push(T el){
-
         ls.addLast(el);
-
     }
 
     public T getTop(){
-
+        checkIndexWithThrow(size()-1);
         return ls.getLast();
-
     }
 
     public T pop(){
-
+        checkIndexWithThrow(size()-1);
         T el = ls.getLast();
-
         ls.removeLast();
-
         return el;
+    }
 
+    public int size(){
+        return ls.size();
     }
 
     public Iterator<T> iterator() {
