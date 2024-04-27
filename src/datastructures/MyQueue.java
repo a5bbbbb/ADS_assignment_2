@@ -31,7 +31,7 @@ public final class MyQueue<T> implements Iterable<T>{
         this.ls = new MyLinkedList<>();
     }
 
-    public void push(T el){
+    public void enqueue(T el){
         ls.addLast(el);
     }
 
@@ -44,12 +44,12 @@ public final class MyQueue<T> implements Iterable<T>{
             throw new RuntimeException("Queue is empty, or operation is performed on non-existent index.");
     }
 
-    public T getFront(){
+    public T peek(){
         checkIndexWithThrow(0);
         return ls.getFirst();
     }
 
-    public T pop(){
+    public T dequeue(){
         checkIndexWithThrow(0);
         T el = ls.getFirst();
         ls.removeFirst();
@@ -58,6 +58,10 @@ public final class MyQueue<T> implements Iterable<T>{
 
     public int size(){
         return ls.size();
+    }
+
+    public boolean empty(){
+        return size() == 0;
     }
 
     public Iterator<T> iterator() {

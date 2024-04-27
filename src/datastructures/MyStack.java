@@ -44,7 +44,7 @@ public final class MyStack<T> implements Iterable<T> {
         ls.addLast(el);
     }
 
-    public T getTop(){
+    public T peek(){
         checkIndexWithThrow(size()-1);
         return ls.getLast();
     }
@@ -58,6 +58,10 @@ public final class MyStack<T> implements Iterable<T> {
 
     public int size(){
         return ls.size();
+    }
+
+    public boolean empty(){
+        return size() == 0;
     }
 
     public Iterator<T> iterator() {

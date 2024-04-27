@@ -66,12 +66,12 @@ public class Main {
                 "\nTo skip -1.");
         int item = scan.nextInt();
         if(item == -1)return;
-        hp.push(item);
+        hp.insert(item);
     }
 
     private static void testGetHeap(){
         if(hp.size() != 0)
-            System.out.println("Min in the MyMinHeap: " + hp.getTop());
+            System.out.println("Min in the MyMinHeap: " + hp.getMin());
         else
             System.out.println("MyMinHeap is empty.");
     }
@@ -80,11 +80,11 @@ public class Main {
         System.out.println("To pop top of the heap enter 1, or 0 to skip.");
         int val = scan.nextInt();
         if(val == 0)return;
-        hp.pop();
+        hp.extractMin();
     }
 
     private static void testHeap(){
-        hp.push(8);
+        hp.insert(8);
         while(true){
             testGetHeap();
             testAddHeap();
@@ -117,29 +117,29 @@ public class Main {
                 "\nTo skip -1.");
         int item = scan.nextInt();
         if(item == -1)return;
-        q.push(item);
+        q.enqueue(item);
     }
 
     private static void testPopQ(){
         System.out.println("To pop top of the heap enter 1, or 0 to skip.");
         int val = scan.nextInt();
         if(val == 0)return;
-        q.pop();
+        q.dequeue();
     }
     private static void testGetQ(){
         if(q.size() > 0)
-            System.out.println("Front elements of the queue is: " + q.getFront());
+            System.out.println("Front elements of the queue is: " + q.peek());
         else
             System.out.println("Queue is empty.");
     }
 
     private static void testQ(){
-        q.push(0);
-        q.push(1);
-        q.push(2);
-        q.push(3);
-        q.push(4);
-        q.push(5);
+        q.enqueue(0);
+        q.enqueue(1);
+        q.enqueue(2);
+        q.enqueue(3);
+        q.enqueue(4);
+        q.enqueue(5);
         while(true){
             testGetQ();
             testPushQ();
