@@ -3,14 +3,14 @@ package datastructures;
 import java.util.Iterator;
 
 public final class MyArrayList<T> implements MyList<T>{
-    private Object[] arr = new Object[5];
 
+    private Object[] arr = new Object[5];
     private int size = 0, actual_size = 5;
 
     /*
      * This class allows iteration through the list.
      */
-    private class MyIterator<T> implements Iterator<T>{
+    private static class MyIterator<T> implements Iterator<T>{
 
         int index = 0;
 
@@ -35,24 +35,16 @@ public final class MyArrayList<T> implements MyList<T>{
 
     private void increaseBuffer(){
         actual_size *= 2;
-
         Object[] newArr = new Object[actual_size];
-
         for(int i = 0 ; i < size; i++)
-
             newArr[i] = arr[i];
-
         arr = newArr;
     }
 
     private void checkBuffer(int target_size) {
-
         if (target_size > actual_size) {
-
             increaseBuffer();
-
             checkBuffer(target_size);
-
         }
     }
 
@@ -76,27 +68,16 @@ public final class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void add(int index, T item) {
-
         if(index == size){
-
             add(item);
-
             return;
-
         }
-
         checkIndex(index);
-
         checkBuffer(size+1);
-
         for(int i = size; i > index; i--)
-
             arr[i] = arr[i-1];
-
         arr[index] = item;
-
         size++;
-
     }
 
     @Override
@@ -127,15 +108,11 @@ public final class MyArrayList<T> implements MyList<T>{
 
     @Override
     public void remove(int index) {
-
         checkIndex(index);
-
         for(int i = index; i < size - 1; i ++)
             arr[i] = arr[i + 1];
-
         size--;
-    }
-
+   }
     @Override
     public void removeFirst() {
         remove(0);
@@ -147,31 +124,18 @@ public final class MyArrayList<T> implements MyList<T>{
     }
 
     private void bubbleSort(T[]  arr){
-
         T temp;
-
         boolean check_again = true;
-
         while(check_again){
-
             check_again = false;
-
             for(int j = 0; j < size - 1; j++) {
-
                 Comparable<T> t1 = (Comparable<T>) arr[j];
-
                 temp = arr[j+1];
-
                 if (t1.compareTo((T) temp) > 0) {
-
                     check_again = true;
-
                     temp = arr[j];
-
                     arr[j] = arr[j + 1];
-
                     arr[j + 1] = temp;
-
                 }
             }
         }
@@ -184,26 +148,17 @@ public final class MyArrayList<T> implements MyList<T>{
 
     @Override
     public int indexOf(Object object) {
-
         for(int i = 0; i < size; i++)
-
             if(object == get(i))
-
                 return i;
-
         return -1;
-
     }
 
     @Override
     public int lastIndexOf(Object object) {
-
         for(int i = size - 1; i >= 0 ; i--)
-
             if(object == get(i))
-
                 return i;
-
         return -1;
     }
 
@@ -214,15 +169,10 @@ public final class MyArrayList<T> implements MyList<T>{
 
     @Override
     public Object[] toArray() {
-
         Object[] nArr = new Object[size];
-
         for(int i = 0; i < size; i++)
-
             nArr[i] = arr[i];
-
         return nArr;
-
     }
 
     @Override
