@@ -27,9 +27,13 @@ public class MyMinHeap<T extends Comparable<T>>{
         return ((Comparable<T>)a).compareTo(b) > 0;
     }
 
+    private int parentOf(int index){
+        return index>>1;
+    }
+
     private void traverseUp(int index){
         if(index <= 1)return;
-        int to = index>>1;
+        int to = parentOf(index);
         if(cmp(tree.get(to),tree.get(index))) {
             swap(to, index);
             traverseUp(to);
@@ -40,19 +44,27 @@ public class MyMinHeap<T extends Comparable<T>>{
         return 1 <= index && index <= size();
     }
 
+    private int leftChildOf(int index){
+        return index<<1;
+    }
+
+    private int rightChildOf(int index){
+        return (index<<1)|1;
+    }
+
     private void heapify(int index){
         if( ! checkIndex(index))
             return;
-        if( ! (checkIndex(index<<1) && cmp(tree.get(index), tree.get(index<<1)) ||
-                checkIndex((index<<1)|1) && cmp(tree.get(index), tree.get((index<<1)|1))))
+        if( ! (checkIndex(leftChildOf(index)) && cmp(tree.get(index), tree.get(leftChildOf(index))) ||
+                checkIndex(rightChildOf(index)) && cmp(tree.get(index), tree.get(rightChildOf(index)))))
             return;
-        if(checkIndex((index<<1)|1)  && cmp(tree.get(index<<1), tree.get((index<<1)|1))){
-            swap(index, (index<<1)|1);
-            heapify((index<<1)|1);
+        if(checkIndex(rightChildOf(index))  && cmp(tree.get(leftChildOf(index)), tree.get(rightChildOf(index)))){
+            swap(index, rightChildOf(index));
+            heapify(rightChildOf(index));
         }
         else {
-            swap(index, index << 1);
-            heapify(index << 1);
+            swap(index, leftChildOf(index));
+            heapify(leftChildOf(index));
         }
     }
 
