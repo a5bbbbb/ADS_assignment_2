@@ -148,7 +148,7 @@ public class Main {
     }
 
     private static void test(){
-        //testHeap();
+        testHeap();
         testQ();
     }
 
